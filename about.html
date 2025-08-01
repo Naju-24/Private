@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>For You ✨</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@700&display=swap"/>
+  <link href="https://fonts.googleapis.com/css2?family=Bitcount:wght@100..900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Nunito', sans-serif;
+      overflow: hidden;
+      background-image: url('p.jpg');
+      background-size: cover;
+      background-image: url('p.jpg');
+      background-size: contain;
+    }
+
+    .background-video {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    .content {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      height: 100vh;
+      color: #fff;
+      padding: 20px;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(2px);
+      animation: fadeIn 2s ease forwards;
+      z-index: 3;
+
+      min-width: 100%;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      animation: popIn 1.2s ease-out forwards;
+      font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
+    p {
+      font-size: 1.5rem;
+      max-width: 600px;
+      animation: fadeInText 2s ease 1s forwards;
+      opacity: 0;
+      font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
+    .back-button {
+  font-family: "Bitcount", system-ui;
+  font-size: 22px;
+  padding: 17px 27px;
+  background-color: #000000; 
+  border: 4px solid #1b91ff; 
+  color: #0eb930d7;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 0 0 4px #000000, 0 0 0 8px #000000;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: transform 0.1s ease, background-color 0.2s ease;
+  outline: none;
+   position: fixed;
+  bottom: 70px;
+  text-decoration: none;
+
+}
+
+    .back-button:hover {
+      background: #a10d0d;
+        transition: transform 0.1s ease, background-color 0.2s ease;
+      color: #000;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes fadeInText {
+      to { opacity: 1; }
+    }
+    @keyframes moveGif1 {
+      0%   { transform: translate(10px, 15px) rotate(0deg); }
+      50%  { transform: translate(-80px, 60px) rotate(180deg); }
+      100% { transform: translate(20px, -30px) rotate(360deg); }
+    }
+
+    @keyframes moveGif2 {
+      0%   { transform: translate(-25px, -10px) rotate(0deg); }
+      50%  { transform: translate(100px, -80px) rotate(180deg); }
+      100% { transform: translate(-40px, 20px) rotate(360deg); }
+    }
+
+    @keyframes moveGif3 {
+      0%   { transform: translate(30px, -20px) rotate(0deg); }
+      50%  { transform: translate(-50px, 100px) rotate(180deg); }
+      100% { transform: translate(40px, -40px) rotate(360deg); }
+    }
+
+    @keyframes moveGif4 {
+      0%   { transform: translate(-20px, 30px) rotate(0deg); }
+      50%  { transform: translate(60px, -60px) rotate(180deg); }
+      100% { transform: translate(-10px, 40px) rotate(360deg); }
+    }
+
+    @keyframes moveGif5 {
+      0%   { transform: translate(15px, -25px) rotate(0deg); }
+      50%  { transform: translate(-100px, 90px) rotate(180deg); }
+      100% { transform: translate(10px, -10px) rotate(360deg); }
+    }
+
+    @keyframes moveGif6 {
+      0%   { transform: translate(-35px, 20px) rotate(0deg); }
+      50%  { transform: translate(80px, -100px) rotate(180deg); }
+      100% { transform: translate(-20px, 30px) rotate(360deg); }
+    }
+
+    .floating-gif {
+      position: absolute;
+      width: 90px;
+      height: auto;
+      pointer-events: none;
+      opacity: 0.85;
+      z-index: 100;
+    }
+
+    .gif-1 { animation: moveGif1 6s ease-in-out 0s infinite alternate; top: 10%; left: 5%; }
+    .gif-2 { animation: moveGif2 7s ease-in-out 1s infinite alternate; top: 20%; left: 80%; }
+    .gif-3 { animation: moveGif3 5.5s ease-in-out 0.5s infinite alternate; top: 70%; left: 10%; }
+    .gif-4 { animation: moveGif4 6.5s ease-in-out 1.2s infinite alternate; top: 30%; left: 50%; }
+    .gif-5 { animation: moveGif5 3.2s ease-in-out 0.8s infinite alternate; top: 60%; left: 75%; }
+    .gif-6{ animation: moveGif5 1.2s ease-in-out 0.8s infinite alternate; top: 80%; left: 65%; }
+    .gif-7 { animation: moveGif6 5.8s ease-in-out 0.3s infinite alternate; top: 80%; left: 20%; }
+    .gif-8 { animation: moveGif6 2.8s ease-in-out 0.3s infinite alternate; top: 25%; left: 40%; }
+    .gif-9 { animation: moveGif6 3.5s ease-in-out 0.3s infinite alternate; top: 25%; left: 70%; }
+    .gif-10 { animation: moveGif6 6.2s ease-in-out 0.3s infinite alternate; top: 45%; left: 20%; }
+
+
+   @media (max-width: 1024px){
+      body{
+        background-position-x: right;
+      }
+      
+    }
+
+     html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: radial-gradient(circle at center, #111 0%, #000 100%);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .eighteen {
+      font-size: 40rem;
+      font-weight: bold;
+      color: #fff;
+      text-shadow:
+        0 0 20px #ff007f,
+        0 0 40px #00f7ff,
+        0 0 60px #ff007f,
+        0 0 80px #00f7ff;
+      animation: pulse 1.5s infinite ease-in-out;
+      z-index: 100;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); text-shadow: 0 0 20px #ff007f, 0 0 40px #00f7ff; }
+      50% { transform: scale(1.1); text-shadow: 0 0 40px #ff007f, 0 0 80px #00f7ff; }
+      100% { transform: scale(1); text-shadow: 0 0 20px #ff007f, 0 0 40px #00f7ff; }
+    }
+
+    canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1;
+      pointer-events: none;}
+  </style>
+</head>
+<body>
+
+  <video class="background-video" autoplay muted loop>
+    <source src="your-video.mp4" type="video/mp4" />
+  </video>
+
+  <div class="content">
+    <h1>HAPPPYYYY BIRFFHHDAYYYY AYSHAAAA </h1>
+    <p>TO THE MOST ADORABLE SWEETHEART AND MISCHEVIOUS AHHH PERSON I KNOW, LKQRGQRGKL <br>
+      YOUUU ARERE COOOLEST BEMSTT RJHGBKEJ, I ADORE YOU SOO MUCHHH. HOPE YOU ARE DOINGGG WELLL,
+      HAVEEEE A GREAAAT YEAAR AHEAD ENJOY YOUR DAYYYLKTGN.
+       ✨</p>
+    <a class="back-button" href="index.html">Back to Home</a>
+  </div>
+
+  <img src="1.gif" class="floating-gif gif-1" alt="Floating Cat 1"/>
+  <img src="2.gif" class="floating-gif gif-2" alt="Floating Cat 2"/>
+  <img src="3.gif" class="floating-gif gif-3" alt="Floating Cat 3"/>
+  <img src="4.gif" class="floating-gif gif-4" alt="Floating Cat 4"/>
+  <img src="5.gif" class="floating-gif gif-5" alt="Floating Cat 5"/>
+  <img src="cat-orange-cat.gif" class="floating-gif gif-6" alt="Floating Cat 6"/>
+  <img src="11.gif" class="floating-gif gif-7" alt="Floating Cat 7"/>
+  <img src="12.gif" class="floating-gif gif-8" alt="Floating Cat 8"/>
+  <img src="13.gif" class="floating-gif gif-9" alt="Floating Cat 9"/>
+  <img src="14.gif" class="floating-gif gif-10" alt="Floating Cat 10"/>
+
+  
+
+  <canvas id="flowerCanvas"></canvas>
+  <pclass="eighteen">18</pclass=>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script>
+    setTimeout(() => {
+      confetti({
+        particleCount: 250,
+        spread: 100,
+        origin: { y: 0.6 }
+      });
+    }, 500);
+
+    function moveCat() {
+    if (!gameRunning) return
+    const maxX = gameBox.clientWidth - cat.clientWidth
+    const maxY = gameBox.clientHeight - cat.clientHeight
+
+    const randomX = Math.floor(Math.random() * maxX)
+    const randomY = Math.floor(Math.random() * maxY)
+
+    cat.style.left = randomX + 'px'
+    cat.style.top = randomY + 'px'
+  }
+
+  const canvas = document.getElementById('flowerCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let t = 0;
+    const flowers = [];
+
+    class Flower {
+      constructor(x, y, color) {
+        this.x = x;
+        this.y = y;
+        this.petalCount = Math.floor(Math.random() * 5) + 5;
+        this.radius = Math.random() * 30 + 30;
+        this.color = color;
+        this.angle = 0;
+      }
+
+      draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.angle);
+        for (let i = 0; i < this.petalCount; i++) {
+          const angle = (Math.PI * 2 / this.petalCount) * i;
+          ctx.rotate(angle);
+          ctx.beginPath();
+          ctx.moveTo(0, 0);
+          ctx.quadraticCurveTo(this.radius / 2, -this.radius, this.radius, 0);
+          ctx.quadraticCurveTo(this.radius / 2, this.radius, 0, 0);
+          ctx.fillStyle = this.color;
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+
+      update() {
+        this.angle += 0.003;
+        this.draw();
+      }
+    }
+
+    function randomColor() {
+      const hue = Math.floor(Math.random() * 360);
+      return `hsla(${hue}, 80%, 70%, 0.4)`;
+    }
+
+    for (let i = 0; i < 35; i++) {
+      const x = Math.random() * canvas.width;
+      const y = Math.random() * canvas.height;
+      flowers.push(new Flower(x, y, randomColor()));
+    }
+
+    function animate() {
+      ctx.fillStyle = 'rgba(15,15,26,0.08)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      flowers.forEach(flower => flower.update());
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+
+    const duration = 20 * 1000;
+    const end = Date.now() + duration;
+    const colors = ['#ff007f', '#00f7ff', '#ffffff'];
+
+    (function frame() {
+      confetti({
+        particleCount: 5,
+        angle: 60,
+        spread: 90,
+        origin: { x: 0 },
+        colors: colors,
+      });
+      confetti({
+        particleCount: 5,
+        angle: 120,
+        spread: 90,
+        origin: { x: 1 },
+        colors: colors,
+      });
+      if (Date.now() < end) {
+        requestAnimationFrame(frame);
+      }
+    })();
+  </script>
+
+</body>
+</html>
