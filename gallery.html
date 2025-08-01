@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Responsive Hamburger Menu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700&family=Urbanist:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: 'Urbanist', sans-serif;
+      overflow: hidden;
+      background: #f8f8f8;
+      background-image: url('p.jpg');
+      background-size: cover;
+    }
+
+     .grid-container {
+      height: calc(100vh - 70px);
+      overflow-y: auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(48%, 1fr));
+      gap: 1rem;
+      padding: 1rem;
+    }
+
+    .grid-item img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      transition: transform 0.3s ease;
+    }
+
+    .grid-item img:hover {
+      transform: scale(1.03);
+    }
+
+    .lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  display: none;
+}
+
+.lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s ease;
+}
+
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hamburger {
+        display: block;
+      }
+
+      .grid-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-wrapper">
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">YOUUUU</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="game.html">Game</a></li>
+      <li><a href="fav.html">Secret!?👀</a></li>
+    </ul>
+  </div>
+  <div class="hamburger" id="hamburger">&#9776;</div>
+</nav>
+
+<div class="grid-container">
+  <div class="grid-item"><img src="https://picsum.photos/id/101/800/600" alt="img1"></div>
+  <div class="grid-item"><img src="https://picsum.photos/id/102/800/600" alt="img2"></div>
+  <div class="grid-item"><img src="https://picsum.photos/id/103/800/600" alt="img3"></div>
+  <div class="grid-item"><img src="https://picsum.photos/id/104/800/600" alt="img4"></div>
+  <div class="grid-item"><img src="https://picsum.photos/id/105/800/600" alt="img5"></div>
+  <div class="grid-item"><img src="https://picsum.photos/id/106/800/600" alt="img6"></div>
+  <div class="grid-item"><img src="https://picsum.photos/id/107/800/600" alt="img7"></div>
+  <div class="grid-item"><img src="https://picsum.photos/id/108/800/600" alt="img8"></div>
+  <div class="grid-item"><img src="https://picsum.photos/id/109/800/600" alt="img9"></div>
+  <div class="grid-item"><img src="https://picsum.photos/id/110/800/600" alt="img10"></div>
+  <div class="grid-item"><img src="https://picsum.photos/id/111/800/600" alt="img11"></div>
+  <div class="grid-item"><img src="https://picsum.photos/id/112/800/600" alt="img12"></div>
+  <div class="grid-item"><img src="https://picsum.photos/id/113/800/600" alt="img13"></div>
+  <div class="grid-item"><img src="https://picsum.photos/id/114/800/600" alt="img14"></div>
+  <div class="grid-item"><img src="https://picsum.photos/id/115/800/600" alt="img15"></div>
+  <div class="grid-item"><img src="https://picsum.photos/id/116/800/600" alt="img16"></div>
+  <div class="grid-item"><img src="https://picsum.photos/id/117/800/600" alt="img17"></div>
+  <div class="grid-item"><img src="https://picsum.photos/id/118/800/600" alt="img18"></div>
+  <div class="grid-item"><img src="https://picsum.photos/id/119/800/600" alt="img19"></div>
+  <div class="grid-item"><img src="https://picsum.photos/id/120/800/600" alt="img20"></div>
+  <div class="grid-item"><img src="https://picsum.photos/id/121/800/600" alt="img21"></div>
+  <div class="grid-item"><img src="https://picsum.photos/id/122/800/600" alt="img22"></div>
+  <div class="grid-item"><img src="https://picsum.photos/id/123/800/600" alt="img23"></div>
+  <div class="grid-item"><img src="https://picsum.photos/id/124/800/600" alt="img24"></div>
+  <div class="grid-item"><img src="https://picsum.photos/id/125/800/600" alt="img25"></div>
+  <div class="grid-item"><img src="https://picsum.photos/id/126/800/600" alt="img26"></div>
+  <div class="grid-item"><img src="https://picsum.photos/id/127/800/600" alt="img27"></div>
+  <div class="grid-item"><img src="https://picsum.photos/id/128/800/600" alt="img28"></div>
+  <div class="grid-item"><img src="https://picsum.photos/id/129/800/600" alt="img29"></div>
+  <div class="grid-item"><img src="https://picsum.photos/id/130/800/600" alt="img30"></div>
+</div>
+<div class="lightbox" id="lightbox">
+  <img src="" alt="Enlarged Image" id="lightbox-img">
+</div>
+<script src="script.js"></script>
+<script>
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const images = document.querySelectorAll('.grid-item img');
+
+  images.forEach(img => {
+    img.addEventListener('click', () => {
+      lightboxImg.src = img.src;
+      lightbox.style.display = 'flex';
+    });
+  });
+
+  lightbox.addEventListener('click', (e) => {
+    if (e.target !== lightboxImg) {
+      lightbox.style.display = 'none';
+    }
+  });
+
+  window.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      lightbox.style.display = 'none';
+    }
+  });
+</script>
+
+</body>
+</html>

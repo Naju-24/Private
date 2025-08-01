@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Catch The Cat Game</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: url('qbg.gif') no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding-top: 100px;
+    background-attachment: scroll;
+  }
+  .navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 75px;
+    background: rgba(0, 0, 0, 0.88);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+  }
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 50px;
+  }
+  .nav-links li a {
+  display: inline-block;
+  text-decoration: none;
+  color: #ffffff;
+  background-color: rgba(0, 0, 0, 0.723);
+  padding: 20px 65px;
+  border-radius: 13px;
+  font-weight: bold;
+  font-size: 1.05rem;
+  transition: all 0.3s ease;
+  border: 1px solid #000000;
+  box-shadow: 0 0 0 rgba(255, 39, 125, 0);
+}
+
+.nav-links li a:hover {
+  color: #ff5c8a;
+  background-color: #fff1f5;
+  transform: scale(1.15);
+  box-shadow: 0 0 15px rgba(255, 92, 138, 0.5);
+}
+
+.nav-links li a.active {
+  color: #ffffff;
+  background-color: #ff5c8a;
+  box-shadow: 0 0 10px rgba(255, 92, 138, 0.7);
+  transform: scale(1.05);
+}
+
+.game-container {
+  display: flex;
+  flex-wrap: wrap;   
+  justify-content: center;
+  gap: 40px;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+ #gameBox {
+  position: relative;
+  width: 90vw;        
+  max-width: 600px;
+  aspect-ratio: 4 / 3;   
+  background: rgba(50, 50, 50, 0.6);
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.7);
+  overflow: hidden;
+  cursor: pointer;
+  will-change: transform, top, left;
+  transform: translateZ(0); 
+}
+
+  #cat {
+    position: absolute;
+    width: 160px;
+    height: 80px;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.2s ease;
+    border-radius: 15px;
+  }
+  #failImg {
+    position: absolute;
+    width: 90px;
+    height: 63px;
+    top: 0;
+    left: 0;
+    display: none;
+    pointer-events: none;
+    user-select: none;
+    border-radius: 15px;
+  }
+  #stats {
+    min-width: 280px;
+    color: #000000;
+    font-size: 1.1rem;
+    background: rgba(20, 20, 20, 0.5);
+    border-radius: 15px;
+    padding: 20px 30px;
+    user-select: none;
+    box-shadow: 0 0 10px #000;
+    min-width: 260px;
+    max-width: 90vw;
+    width: 100%;
+    background-color: rgba(255, 200, 0, 0.577);
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+  
+  #stats h2 {
+    margin-bottom: 15px;
+    font-weight: 800;
+    border-bottom: 2px solid #fff;
+    padding-bottom: 5px;
+  }
+  #scoreDisplay, #highScoreDisplay, #timerDisplay {
+    margin: 10px 0;
+  }
+  #startBtn, #difficultySelect {
+    display: block;
+    margin: 15px auto 0 auto;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    background-color: #000000;
+    color: #fff;
+    transition: background-color 0.3s ease;
+    user-select: none;
+  }
+  #startBtn:hover, #difficultySelect:hover {
+    background-color: #555;
+  }
+  .hidden {
+    display: none !important;
+  }
+  #popupMessage {
+    position: fixed;
+    top: 14.5%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 0, 0, 0.85);
+    color: #fff;
+    padding: 15px 25px;
+    border-radius: 15px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+    z-index: 1000;
+    user-select: none;
+  }
+  #popupMessage.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+.hamburger {
+  display: none;
+  font-size: 2.8rem;
+  color: white;
+  cursor: pointer;
+  position: absolute;
+  right: 25px;
+  top: 18px;
+  z-index: 9999;
+}
+
+@media (max-width: 1024px) {
+  .hamburger {
+    display: block;
+    position: static; 
+    margin-left: auto;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    flex-direction: column;
+    background: rgba(0, 0, 0, 0.95);
+    height: 100vh;
+    width: 100%;
+    padding-top: 100px;
+    gap: 20px;
+    transition: right 0.3s ease-in-out;
+    align-items: center;
+    z-index: 1089;
+    pointer-events: none;
+  }
+
+  .nav-links.open {
+    right: 0;
+    pointer-events: auto;
+  }
+
+  .nav-links li {
+    width: 100%;
+    max-width: 300px;
+    z-index: 10099;
+  }
+
+  .nav-links li a {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 40px 10px;
+    border-radius: 13px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    border: 1px solid #000;
+    transition: all 0.3s ease;
+    z-index: 9999;
+  }
+
+  .nav-links li a:hover {
+    background-color: #fff1f5;
+    color: #ff5c8a;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 92, 138, 0.5);
+  }
+}
+
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <div class="hamburger" id="hamburger">&#9776;</div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">YOUUUU</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="game.html">Game</a></li>
+    <li><a href="fav.html">Secret!?👀</a></li>
+  </ul>
+</nav>
+
+
+<div class="game-container">
+  <div id="gameBox">
+    <img id="cat" src="5.gif" alt="Catch the cat" />
+    <img id="failImg" src="cat-orange-cat.gif" alt="Fail" />
+  </div>
+  <div id="stats">
+    <h2>Catch The Cat</h2>
+    <div id="scoreDisplay">Score: 0</div>
+    <div id="highScoreDisplay">High Score: 0</div>
+    <div id="timerDisplay">Time Left: 20s</div>
+
+    <select id="difficultySelect">
+      <option value="1500">Easy</option>
+      <option value="1000" selected>Medium</option>
+      <option value="600">Hard</option>
+      <option value="hardcoref">Hardcore (Miss = Game Over)</option>
+    </select>
+    <button id="startBtn">Start Game</button>
+  </div>
+</div>
+
+<div id="popupMessage"></div>
+
+<script>
+  const gameBox = document.getElementById('gameBox')
+  const cat = document.getElementById('cat')
+  const failImg = document.getElementById('failImg')
+  const startBtn = document.getElementById('startBtn')
+  const difficultySelect = document.getElementById('difficultySelect')
+  const popupMessage = document.getElementById('popupMessage')
+
+  const scoreDisplay = document.getElementById('scoreDisplay')
+  const highScoreDisplay = document.getElementById('highScoreDisplay')
+  const timerDisplay = document.getElementById('timerDisplay')
+
+  let score = 0
+  let highScore = localStorage.getItem('highScore') || 0
+  let gameDuration = 20
+  let timeLeft = gameDuration
+  let moveInterval
+  let gameTimer
+  let gameRunning = false
+  let difficulty = '1000'
+
+  highScoreDisplay.textContent = `High Score: ${highScore}`
+
+  const failMessages = [
+    "Oops! You missed! Try again!",
+    "Missed the cat! Better luck next time!",
+    "Haha, missed it! Focus!",
+    "You missed! Don't give up!",
+    "Cat got away! Careful!"
+  ]
+
+  function startGame() {
+    score = 0
+    timeLeft = gameDuration
+    gameRunning = true
+    difficulty = difficultySelect.value
+
+    scoreDisplay.textContent = `Score: ${score}`
+    timerDisplay.textContent = `Time Left: ${timeLeft}s`
+
+    startBtn.classList.add('hidden')
+    difficultySelect.classList.add('hidden')
+
+    cat.style.visibility = 'visible'
+    failImg.style.display = 'none'
+
+    moveCat()
+
+    if (difficulty === 'hardcoref') {
+      moveInterval = setInterval(moveCat, 1000)
+    } else {
+      moveInterval = setInterval(moveCat, parseInt(difficulty))
+    }
+
+    gameTimer = setInterval(() => {
+      timeLeft--
+      timerDisplay.textContent = `Time Left: ${timeLeft}s`
+      if (timeLeft <= 0) {
+        endGame(false)
+      }
+    }, 1000)
+  }
+
+  function moveCat() {
+    if (!gameRunning) return
+    const maxX = gameBox.clientWidth - cat.clientWidth
+    const maxY = gameBox.clientHeight - cat.clientHeight
+
+    const randomX = Math.floor(Math.random() * maxX)
+    const randomY = Math.floor(Math.random() * maxY)
+
+    cat.style.left = randomX + 'px'
+    cat.style.top = randomY + 'px'
+  }
+
+  function catchCat() {
+    if (!gameRunning) return
+    score++
+    scoreDisplay.textContent = `Score: ${score}`
+    moveCat()
+  }
+
+  function missCat() {
+    if (!gameRunning) return
+    if (difficulty === 'hardcoref') {
+      endGame(true)
+      return
+    }
+    showFail()
+  }
+
+  function showFail() {
+    failImg.style.display = 'block'
+    failImg.style.left = cat.style.left
+    failImg.style.top = cat.style.top
+    cat.style.visibility = 'hidden'
+
+    showPopup(failMessages[Math.floor(Math.random() * failMessages.length)])
+
+    setTimeout(() => {
+      failImg.style.display = 'none'
+      cat.style.visibility = 'visible'
+    }, 1500)
+  }
+
+  function showPopup(message) {
+    popupMessage.textContent = message
+    popupMessage.classList.add('show')
+    setTimeout(() => {
+      popupMessage.classList.remove('show')
+    }, 2000)
+  }
+
+  function endGame(missed) {
+    gameRunning = false
+    clearInterval(moveInterval)
+    clearInterval(gameTimer)
+    cat.style.visibility = 'hidden'
+    failImg.style.display = 'none'
+    startBtn.classList.remove('hidden')
+    difficultySelect.classList.remove('hidden')
+
+    if (score > highScore) {
+      highScore = score
+      localStorage.setItem('highScore', highScore)
+      highScoreDisplay.textContent = `High Score: ${highScore}`
+    }
+
+    if (missed) {
+      showPopup("Game Over! You missed the cat on Hardcore mode!")
+    } else {
+      showPopup(`Time's up! Your score: ${score}`)
+    }
+  }
+
+  cat.addEventListener('click', catchCat)
+
+  gameBox.addEventListener('click', (e) => {
+    if (!gameRunning) return
+    if (e.target !== cat) {
+      missCat()
+    }
+  })
+
+  startBtn.addEventListener('click', startGame)
+
+  const navLinks = document.querySelectorAll('.nav-links a')
+  const currentPage = window.location.pathname.split('/').pop()
+  navLinks.forEach(link => {
+    if (link.getAttribute('href') === currentPage) {
+      link.classList.add('active')
+    }
+  })
+
+  const hamburger = document.getElementById('hamburger');
+const nav = document.querySelector('.nav-links');
+
+hamburger.addEventListener('click', () => {
+  nav.classList.toggle('open');
+});
+
+</script>
+</body>
+</html>
